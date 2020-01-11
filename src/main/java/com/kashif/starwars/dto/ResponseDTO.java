@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -13,5 +14,5 @@ public class ResponseDTO {
     private String type;
     private int count;
     private String name;
-    private List<Result> films;
+    private List<Map> films;
 }

@@ -13,12 +13,12 @@ public class StarWarHandler implements Handler {
     @Override
     public void handle(Context ctx) throws Exception {
         String type = ctx.getRequest().getQueryParams().get("type");
-//        MultiValueMap<String, String> queryParams = ctx.getRequest().getQueryParams();
+        MultiValueMap<String, String> queryParams = ctx.getRequest().getQueryParams();
         String name = ctx.getRequest().getQueryParams().get("name");
         System.out.println(type);
         System.out.println(name);
         StarWarService starWarService = new StarWarService();
-        ResponseDTO responseDTO = starWarService.getDetailsFor(type, name);
+        ResponseDTO responseDTO = starWarService.getDetailsFor(type, name, queryParams);
         Gson gson = new Gson();
         Response response = ctx.getResponse();
         response.contentTypeIfNotSet("application/json");
