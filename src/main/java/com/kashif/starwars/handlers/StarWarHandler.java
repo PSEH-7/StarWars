@@ -20,11 +20,18 @@ public class StarWarHandler implements Handler {
         StarWarService starWarService = new StarWarService();
         ResponseDTO responseDTO = starWarService.getDetailsFor(type, name, queryParams);
         Gson gson = new Gson();
-        Response response = ctx.getResponse();
-        response.contentTypeIfNotSet("application/json");
-        response.status(Status.OK).send(
-                gson.toJson(responseDTO)
-        );
+        if(responseDTO.getFilms()==null || responseDTO.getFilms().isEmpty()){
+            Response response = ctx.getResponse();
+            response.contentTypeIfNotSet("application/json");
+            response.status(Status.NOT_FOUND).send(
+            );
+        }else {
+            Response response = ctx.getResponse();
+            response.contentTypeIfNotSet("application/json");
+            response.status(Status.OK).send(
+                    gson.toJson(responseDTO)
+            );
+        }
 //        ctx.render("Welcome to Baeldung ratpack!!!");
     }
 }
